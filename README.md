@@ -1,6 +1,6 @@
 # SiswaKu
 
-<img src="screenshot/Mockup.jpg" alt="Mockup" width="300">
+<img src="screenshot/Mockup.jpg" alt="Mockup" width="400">
 
 ## Deskripsi
 
@@ -22,10 +22,15 @@ SiswaKu adalah sebuah sistem pendataan siswa yang dirancang untuk memudahkan pen
 ## Teknologi yang Digunakan
 
 - **PHP**: Bahasa pemrograman server-side yang digunakan untuk mengembangkan fitur-fitur dinamis pada website ini.
+  - **Referensi**: https://www.w3schools.com/php/
 - **HTML**: Bahasa markup yang digunakan untuk membuat struktur dan konten dari halaman web.
+  - **Referensi**: https://www.w3schools.com/html/
 - **CSS**: Digunakan untuk mendesain dan mengatur tampilan dari halaman web agar lebih menarik dan responsif.
+  - **Referensi**: https://www.w3schools.com/css/
 - **MySQL**: Sistem manajemen basis data yang digunakan untuk menyimpan dan mengelola data siswa secara efisien.
+  - **Referensi**: https://www.w3schools.com/MySQL/
 - **Bootstrap**: Framework CSS yang digunakan untuk mempercepat pengembangan antarmuka pengguna yang responsif dan modern.
+  - **Referensi**: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 
 ## Arsitektur
 
@@ -34,6 +39,7 @@ SiswaKu dibangun menggunakan arsitektur Model-View-Controller (MVC). Arsitektur 
 - Model: berisi logika bisnis dan data yang digunakan oleh aplikasi.
 - View: berisi kode-kode HTML yang digunakan untuk menampilkan data ke pengguna.
 - Controller: berisi logika yang digunakan untuk mengatur alur aplikasi dan berinteraksi dengan model dan view.
+  - **Referensi**: https://www.dicoding.com/blog/apa-itu-mvc-pahami-konsepnya/
 
 ## Struktur Folder
 
