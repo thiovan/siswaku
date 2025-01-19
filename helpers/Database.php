@@ -11,6 +11,7 @@ class Database
     $this->connect();
   }
 
+  // Koneksi ke database
   private function connect()
   {
     try {
@@ -21,6 +22,7 @@ class Database
     }
   }
 
+  // Mendapatkan koneksi
   public function getConnection()
   {
     return $this->connection;

@@ -8,18 +8,22 @@
 
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/custom.css"> <!-- Link to custom CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css">
   <script src="assets/js/bootstrap.min.js"></script>
 </head>
 
-<body class="min-vh-100 elegant-background"> <!-- Added new background class -->
+<body class="min-vh-100 elegant-background">
 
   <!-- Menampilkan Navigasi -->
   <nav class="navbar bg-body-tertiary">
     <div class="container">
+
+      <!-- Logo -->
       <a class="navbar-brand" href="/">
         <img src="assets/images/logo-gray.png" width="64">
       </a>
+
+      <!-- Menampilkan Dropdown Profile -->
       <div class="dropdown text-end">
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="assets/images/icon-user.png" alt="mdo" width="32" height="32" class="rounded-circle">
@@ -39,10 +43,11 @@
   </nav>
   <!-- / Menampilkan Navigasi -->
 
+  <!-- Menampilkan Konten -->
   <main class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="card shadow"> <!-- Added shadow class -->
+        <div class="card shadow">
           <div class="card-header">
             <h4 class="text-center"><?php echo isset($data['nis']) ? 'Ubah' : 'Tambah'; ?> Data Siswa</h4>
           </div>
@@ -55,6 +60,7 @@
               }
               ?>
 
+              <!-- Menampilkan field NIS -->
               <div class="mb-3">
                 <label for="nis" class="form-label">NIS</label>
                 <input
@@ -68,6 +74,7 @@
                 <div class="invalid-feedback">NIS harus berupa angka dan unik</div>
               </div>
 
+              <!-- Menampilkan field Nama Lengkap -->
               <div class="mb-3">
                 <label for="fullname" class="form-label">Nama Lengkap</label>
                 <input
@@ -80,6 +87,7 @@
                 <div class="invalid-feedback">Nama hanya boleh berisi huruf</div>
               </div>
 
+              <!-- Menampilkan field Kelas -->
               <div class="mb-3">
                 <label for="kelas" class="form-label">Kelas</label>
                 <input
@@ -92,6 +100,7 @@
                 <div class="invalid-feedback">Kelas hanya boleh berisi huruf dan angka</div>
               </div>
 
+              <!-- Menampilkan field Alamat -->
               <div class="mb-3">
                 <label for="address" class="form-label">Alamat</label>
                 <textarea
@@ -104,6 +113,7 @@
 
               <?php unset($_SESSION['flash_message']); ?>
 
+              <!-- Tombol Simpan -->
               <button type="submit" class="btn btn-lg btn-primary w-100">Simpan</button>
             </form>
           </div>
