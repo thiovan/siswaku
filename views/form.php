@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo APP_NAME; ?></title>
 
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/custom.css"> <!-- Link to custom CSS -->
   <script src="assets/js/bootstrap.min.js"></script>
@@ -43,7 +44,7 @@
       <div class="col-md-6">
         <div class="card shadow"> <!-- Added shadow class -->
           <div class="card-header">
-            <h4 class="text-center">Tambah Data Siswa</h4>
+            <h4 class="text-center"><?php echo isset($data['nis']) ? 'Ubah' : 'Tambah'; ?> Data Siswa</h4>
           </div>
           <div class="card-body">
             <form action="<?php echo isset($data['nis']) ? 'form/update' : 'form/insert'; ?>" method="post" novalidate>

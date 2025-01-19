@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAME; ?></title>
-
+    
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <script src="assets/js/bootstrap.min.js"></script>
@@ -42,7 +43,7 @@
 
 
         <img src="assets/images/logo-gray.png" width="150" class="mt-4 mb-2 d-block mx-auto">
-        <h3 class="mb-5 display-5">SISTEM PENDATAAN SISWA</h3>
+        <h3 class="mb-5 display-6">SISTEM PENDATAAN SISWA</h3>
 
         <div class="row">
             <div class="col-12 col-md-6">
@@ -63,7 +64,40 @@
             </div>
         </div>
 
-        <div class="accordion mb-2 mt-4" id="accordionExample">
+        <div class="accordion mb-2 mt-4# Website Title
+        
+        ## Description
+        
+        This website is a student data tracking system that allows users to manage and filter student data. It provides a user-friendly interface for adding, updating, and deleting student records.
+        
+        ## Features
+        
+        - User authentication and authorization
+        - Student data management
+        - Filtering and searching student data
+        - Responsive design for mobile and desktop devices
+        
+        ## Installation
+        
+        1. Clone the repository
+        2. Install dependencies with `composer install`
+        3. Configure the database settings in the `.env` file
+        4. Run the database migrations with `php artisan migrate`
+        
+        ## Usage
+        
+        1. Start the development server with `php artisan serve`
+        2. Access the website in your web browser at `http://localhost:8000`
+        3. Sign in with your credentials or create a new account
+        4. Explore the website features and start managing your student data
+        
+        ## Contributing
+        
+        Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
+        
+        ## License
+        
+        This project is licensed under the [MIT License](LICENSE)." id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

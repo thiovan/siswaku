@@ -6,40 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAME; ?></title>
 
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
-
-        .form-signin {
-            max-width: 400px;
-            padding: 1rem;
-        }
-
-        .form-signin .form-floating:focus-within {
-            z-index: 2;
-        }
-
-        .form-signin input[type="text"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    </style>
-
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css"> <!-- Link to custom CSS -->
     <script src="assets/js/bootstrap.min.js"></script>
 </head>
 
-<body class="d-flex align-items-center py-4"> <!-- Updated class -->
+<body class="d-flex align-items-center py-4 min-vh-100"> <!-- Updated class -->
 
     <main class="form-signin w-100 m-auto">
         <form action="login/auth" method="post">
