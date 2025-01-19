@@ -6,6 +6,11 @@ class Login
 {
   public function index()
   {
+    if (isset($_SESSION['user_id'])) {
+      // Menampilkan halaman utama   
+      return Route::redirect('/');
+    }
+
     // Menampilkan halaman login
     return Route::view('login');
   }
@@ -26,13 +31,11 @@ class Login
       $_SESSION['user_role'] = $user['role'];
 
       // Redirect ke dashboard
-      return Route::redirect('/dashboard');
-
+      return Route::redirect('/');
     } else {
 
       // Redirect ke halaman login dengan pesan error
-      return Route::redirect('/login', 'Nama Pengguna atau Kata Kunci Salah');
-
+      return Route::redirect('/login', 'Nama Pengguna atau Kata Sandi Salah');
     }
   }
 }

@@ -57,7 +57,7 @@
             </div>
             <div class="form-floating">
                 <input type="password" class="form-control" name="password" placeholder="Password" required>
-                <label for="floatingPassword">Kata Kunci</label>
+                <label for="floatingPassword">Kata Sandi</label>
             </div>
 
             <button class="btn btn-primary w-100 py-2" type="submit">Masuk</button>
