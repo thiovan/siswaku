@@ -35,10 +35,11 @@
     </style>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css"> <!-- Link to custom CSS -->
     <script src="assets/js/bootstrap.min.js"></script>
 </head>
 
-<body class="d-flex align-items-center py-4 bg-body-tertiary">
+<body class="d-flex align-items-center py-4"> <!-- Updated class -->
 
     <main class="form-signin w-100 m-auto">
         <form action="login/auth" method="post">

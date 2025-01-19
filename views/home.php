@@ -40,7 +40,9 @@
     <!-- Menampilkan Konten -->
     <main class="container text-center my-4">
 
-        <h3 class="mb-5">SISTEM PENDATAAN SISWA</h3>
+
+        <img src="assets/images/logo-gray.png" width="150" class="mt-4 mb-2 d-block mx-auto">
+        <h3 class="mb-5 display-5">SISTEM PENDATAAN SISWA</h3>
 
         <div class="row">
             <div class="col-12 col-md-6">
@@ -61,49 +63,67 @@
             </div>
         </div>
 
-        <div class="row mt-4 mb-2">
-            <div class="col-12 col-md-2">
-                <div class="d-grid gap-2">
-                    <a class="btn btn-primary btn-sm" href="/form">+ Tambah Siswa</a>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-3 offset-md-3">
-                <form class="d-flex" role="filter" method="get">
-                    <select class="form-select me-2 form-select-sm" name="kelas" aria-label="Pilih Kelas">
-                        <option value="">Pilih Kelas</option>
-                        <?php foreach ($classes as $class): ?>
-                            <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button class="btn btn-success btn-sm" type="submit">Filter</button>
-                </form>
-            </div>
-
-            <div class="col-12 col-md-3">
-                <form class="d-flex" role="search" method="get">
-                    <input class="form-control me-2 form-control-sm" type="search" placeholder="Masukkan NIS" name="nis">
-                    <button class="btn btn-success btn-sm" type="submit">Cari</button>
-                </form>
-            </div>
-
-            <div class="col-12 col-md-1">
-                <div class="d-grid gap-2 text-center">
-                    <button class="btn btn-secondary btn-sm" type="button" onclick="window.print()">Cetak</button>
+        <div class="accordion mb-2 mt-4" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Tambahkan atau Filter Data Siswa
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-12 col-md-2 my-1">
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-primary" href="/form">+ Tambah Siswa</a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3 offset-md-3 my-1">
+                                <form class="row" role="filter" method="get">
+                                    <div class="col-8">
+                                        <select class="form-select me-2" name="kelas" aria-label="Pilih Kelas">
+                                            <option value="">Pilih Kelas</option>
+                                            <?php foreach ($classes as $class): ?>
+                                                <option value="<?php echo $class; ?>"><?php echo $class; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-success w-100" type="submit">Filter</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-12 col-md-3 my-1">
+                                <form class="row" role="search" method="get">
+                                    <div class="col-8">
+                                        <input class="form-control me-2" type="search" placeholder="Masukkan NIS" name="nis">
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-success w-100" type="submit">Cari</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-12 col-md-1 my-1">
+                                <div class="d-grid gap-2 text-center">
+                                    <button class="btn btn-secondary" type="button" onclick="window.print()">Cetak</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="table-responsive border rounded">
-            <table class="table table-hover">
+        <div class="table-responsive rounded">
+            <table class="table table-hover border">
                 <thead>
                     <tr>
-                        <th scope="col">NIS</th>
-                        <th scope="col">Nama Lengkap</th>
-                        <th scope="col">Kelas</th>
-                        <th scope="col">Alamat</th>
+                        <th class="bg-primary-subtle" scope="col">NIS</th>
+                        <th class="bg-primary-subtle" scope="col">Nama Lengkap</th>
+                        <th class="bg-primary-subtle" scope="col">Kelas</th>
+                        <th class="bg-primary-subtle" scope="col">Alamat</th>
                         <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
-                            <th scope="col" class="d-print-none">Aksi</th>
+                            <th class="bg-primary-subtle" scope="col" class="d-print-none">Aksi</th>
                         <?php endif; ?>
                     </tr>
                 </thead>
