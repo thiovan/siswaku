@@ -1,0 +1,42 @@
+body {
+  background: linear-gradient(to right, #f0f4f8, #e0e7ef);
+  padding-bottom: 70px;
+}
+
+.navbar {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+}
+
+footer {
+  background-color: #f8f9fa;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media print {
+  body * {
+    visibility: collapse;
+  }
+
+  .table-responsive {
+    visibility: visible;
+  }
+
+  .table-responsive * {
+    visibility: visible;
+  }
+}

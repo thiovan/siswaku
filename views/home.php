@@ -6,22 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAME; ?></title>
 
-    <style>
-        @media print {
-            body * {
-                visibility: collapse;
-            }
-
-            .table-responsive {
-                visibility: visible;
-            }
-
-            .table-responsive * {
-                visibility: visible;
-            }
-        }
-    </style>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
     <script src="assets/js/bootstrap.min.js"></script>
 </head>
 
@@ -57,7 +43,7 @@
         <h3 class="mb-5">SISTEM PENDATAAN SISWA</h3>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <div class="card text-bg-light mb-3">
                     <h5 class="card-header">Jumlah Siswa</h5>
                     <div class="card-body">
@@ -65,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-md-6">
                 <div class="card text-bg-light mb-3">
                     <h5 class="card-header">Jumlah Kelas</h5>
                     <div class="card-body">
@@ -76,13 +62,13 @@
         </div>
 
         <div class="row mt-4 mb-2">
-            <div class="col-md-2">
+            <div class="col-12 col-md-2">
                 <div class="d-grid gap-2">
                     <a class="btn btn-primary btn-sm" href="/form">+ Tambah Siswa</a>
                 </div>
             </div>
 
-            <div class="col-md-3 offset-md-3">
+            <div class="col-12 col-md-3 offset-md-3">
                 <form class="d-flex" role="filter" method="get">
                     <select class="form-select me-2 form-select-sm" name="kelas" aria-label="Pilih Kelas">
                         <option value="">Pilih Kelas</option>
@@ -94,14 +80,14 @@
                 </form>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-12 col-md-3">
                 <form class="d-flex" role="search" method="get">
                     <input class="form-control me-2 form-control-sm" type="search" placeholder="Masukkan NIS" name="nis">
                     <button class="btn btn-success btn-sm" type="submit">Cari</button>
                 </form>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-12 col-md-1">
                 <div class="d-grid gap-2 text-center">
                     <button class="btn btn-secondary btn-sm" type="button" onclick="window.print()">Cetak</button>
                 </div>
@@ -150,52 +136,13 @@
     <!-- / Menampilkan Konten -->
 
     <!-- Menampilkan Footer -->
-    <footer class="position-absolute bottom-0 start-0 w-100 py-3">
+    <footer class="fixed-bottom w-100">
         <ul class="nav border-bottom pb-3 mb-3">
         </ul>
         <p class="text-center text-body-secondary">Copyright &copy; 2025. Developed by <?php echo APP_AUTHOR; ?></p>
     </footer>
     <!-- / Menampilkan Footer -->
-
-    <!-- Menampilkan Modal -->
-    <div class="modal fade" id="modalInsert" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <form class="modal-content needs-validation" method="post" novalidate>
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Data Siswa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="mb-3">
-                        <label for="nis" class="form-label">NIS</label>
-                        <input type="number" class="form-control is-invalid" id="nis" name="nis" pattern="[0-9]+" required>
-                        <div class="invalid-feedback">NIS harus berupa angka dan unik</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="kelas" class="form-label">Kelas</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" pattern="[a-zA-Z0-9]+" required>
-                        <div class="invalid-feedback">Kelas harus berupa alphanumeric</div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- / Menampilkan Modal -->
 </body>
-
-<?php if (!empty($validation)): ?>
-    <script>
-        $("#modalInsert").modal();
-    </script>
-<?php endif; ?>
 
 
 </html>

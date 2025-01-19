@@ -7,10 +7,11 @@
   <title><?php echo APP_NAME; ?></title>
 
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/custom.css"> <!-- Link to custom CSS -->
   <script src="assets/js/bootstrap.min.js"></script>
 </head>
 
-<body class="min-vh-100">
+<body class="min-vh-100 elegant-background"> <!-- Added new background class -->
 
   <!-- Menampilkan Navigasi -->
   <nav class="navbar bg-body-tertiary">
@@ -40,7 +41,7 @@
   <main class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="card">
+        <div class="card shadow"> <!-- Added shadow class -->
           <div class="card-header">
             <h4 class="text-center">Tambah Data Siswa</h4>
           </div>
@@ -110,9 +111,8 @@
     </div>
   </main>
 
-
   <!-- Menampilkan Footer -->
-  <footer class="position-absolute bottom-0 start-0 w-100 py-3">
+  <footer class="fixed-bottom w-100">
     <ul class="nav border-bottom pb-3 mb-3">
     </ul>
     <p class="text-center text-body-secondary">Copyright &copy; 2025. Developed by <?php echo APP_AUTHOR; ?></p>
