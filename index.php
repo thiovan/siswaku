@@ -6,7 +6,7 @@ foreach (glob(__DIR__ . '/helpers/' . '*.php') as $file) {
 }
 
 // Ambil URL dari query string
-$url = isset($_GET['url']) ? $_GET['url'] : '';
+$url = $_SERVER['REQUEST_URI'];
 
 // Cek apakah permintaan adalah untuk file CSS, JS, atau gambar
 if (preg_match('/^assets\/(css|js|images)\/(.+)$/', $url, $matches)) {
