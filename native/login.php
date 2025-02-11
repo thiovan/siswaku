@@ -1,7 +1,11 @@
 <?php
 
+// KONFIGURASI
+
 require_once 'config.php';
 session_start();
+
+// KODE FUNGSI
 
 // Fungsi untuk menghubungkan ke database
 function connectDb()
@@ -21,10 +25,11 @@ function isLoggedIn()
     return isset($_SESSION['user_id']);
 }
 
-// Fungsi untuk memeriksa apakah pengguna mengirimkan formulir login
-function isLoginSubmitted()
+// Fungsi untuk melakukan redirect
+function redirectTo($target)
 {
-    return isset($_POST['username']) && isset($_POST['password']);
+    header('location: ' . $target);
+    exit();
 }
 
 // Fungsi untuk mengotentikasi pengguna
@@ -55,24 +60,36 @@ function saveUserSession($user)
 function showError($message)
 {
     $_SESSION['flash_message'] = $message;
-    header('location: login.php');
-    exit();
+
+    // Redirect kembali ke halaman login
+    redirectTo('login.php');
 }
 
+// KODE UTAMA
+
+// Menghubungkan ke database
 $DB = connectDb();
 
+// Jika pengguna sudah login, maka redirect ke halaman index
 if (isLoggedIn()) {
-    header('location: index.php');
-    exit();
+    redirectTo('index.php');
 }
 
-if (isLoginSubmitted()) {
+// Jika pengguna mengirimkan data login
+if (isset($_POST['username']) && isset($_POST['password'])) {
+
+    // Mencoba mengotentikasi pengguna
     $user = authenticateUser($DB, $_POST['username'], $_POST['password']);
+
+    // Jika pengguna berhasil login, maka simpan informasi pengguna ke sesi
     if ($user) {
+        
+        // Simpan informasi pengguna ke sesi dan redirect ke halaman index
         saveUserSession($user);
-        header('location: index.php');
-        exit();
+        redirectTo('index.php');
     } else {
+
+        // Menampilkan pesan error jika nama pengguna atau kata sandi salah
         showError('Nama Pengguna atau Kata Sandi Salah');
     }
 }
