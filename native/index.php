@@ -1,12 +1,11 @@
 <?php
+
+// KONFIGURASI
+
 require_once 'config.php';
 session_start();
 
-// Fungsi untuk memeriksa apakah pengguna sudah login
-function isLoggedIn()
-{
-    return isset($_SESSION['user_id']);
-}
+// KODE FUNGSI
 
 // Fungsi untuk menghubungkan ke database
 function connectDb()
@@ -20,31 +19,47 @@ function connectDb()
     }
 }
 
+// Fungsi untuk memeriksa apakah pengguna sudah login
+function isLoggedIn()
+{
+    return isset($_SESSION['user_id']);
+}
+
+// Fungsi untuk melakukan redirect
+function redirectTo($target)
+{
+    header('location: ' . $target);
+    exit();
+}
+
+// Fungsi untuk mengambil data siswa berdasarkan NIS
+function fetchStudentByNIS($nis, $DB)
+{
+    $query = "SELECT * FROM students WHERE nis = :nis";
+    $stmt = $DB->prepare($query);
+    $stmt->bindParam(':nis', $nis);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Fungsi untuk mengambil data siswa berdasarkan kelas
+function fetchStudentByClass($class, $DB)
+{
+    $query = "SELECT * FROM students WHERE class = :class";
+    $stmt = $DB->prepare($query);
+    $stmt->bindParam(':class', $class);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 // Fungsi untuk mengambil data semua siswa
 function fetchStudents($DB)
 {
-    $students = [];
-    if (isset($_GET['nis']) && !empty($_GET['nis'])) {
-        $query = "SELECT * FROM students WHERE nis = :nis";
-        $stmt = $DB->prepare($query);
-        $stmt->bindParam(':nis', $_GET['nis']);
-        $stmt->execute();
-        $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } elseif (isset($_GET['kelas']) && !empty($_GET['kelas'])) {
-        $query = "SELECT * FROM students WHERE class = :class";
-        $stmt = $DB->prepare($query);
-        $stmt->bindParam(':class', $_GET['kelas']);
-        $stmt->execute();
-        $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        $query = "SELECT * FROM students ORDER BY id DESC";
-        $stmt = $DB->prepare($query);
-        $stmt->execute();
-        $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    return $students;
+    $query = "SELECT * FROM students ORDER BY id DESC";
+    $stmt = $DB->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 // Fungsi untuk mengambil data semua kelas
 function fetchClasses($DB)
@@ -55,15 +70,34 @@ function fetchClasses($DB)
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
+// KODE UTAMA
 
+// Menghubungkan ke database
 $DB = connectDb();
 
+// Memeriksa apakah pengguna sudah login
 if (!isLoggedIn()) {
-    header('location: login.php');
-    exit();
+
+    // Redirect ke halaman login jika belum login
+    redirectTo('login.php');
 }
 
-$students = fetchStudents($DB);
+// Mengambil data siswa
+if (isset($_GET['nis']) && !empty($_GET['nis'])) {
+
+    // Mengambil data siswa berdasarkan NIS
+    $students = fetchStudentByNIS($_GET['nis'], $DB);
+} elseif (isset($_GET['kelas']) && !empty($_GET['kelas'])) {
+
+    // Mengambil data siswa berdasarkan kelas
+    $students = fetchStudentByClass($_GET['kelas'], $DB);
+} else {
+
+    // Mengambil data semua siswa
+    $students = fetchStudents($DB);
+}
+
+// Mengambil data kelas
 $classes = fetchClasses($DB);
 
 ?>

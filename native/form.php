@@ -1,7 +1,11 @@
 <?php
 
+// KONFIGURASI
+
 require_once 'config.php';
 session_start();
+
+// KODE FUNGSI
 
 // Fungsi untuk menghubungkan ke database
 function connectDb()
@@ -19,6 +23,13 @@ function connectDb()
 function isLoggedIn()
 {
   return isset($_SESSION['user_id']);
+}
+
+// Fungsi untuk melakukan redirect
+function redirectTo($target)
+{
+  header('location: ' . $target);
+  exit();
 }
 
 // Fungsi untuk melakukan validasi data
@@ -63,70 +74,108 @@ function validate($data, $DB)
   return $validation;
 }
 
+// Fungsi untuk mendapatkan data siswa berdasarkan NIS
+function getStudentByNIS($nis, $DB)
+{
+  $query = "SELECT * FROM students WHERE nis = :nis";
+  $stmt = $DB->prepare($query);
+  $stmt->bindParam(':nis', $nis);
+  $stmt->execute();
+  return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// Fungsi untuk menambahkan data siswa
+function insertStudent($data, $DB)
+{
+  $query = "INSERT INTO students (nis, fullname, class, address) VALUES (:nis, :fullname, :class, :address)";
+  $stmt = $DB->prepare($query);
+  $stmt->bindParam(':nis', $data['nis']);
+  $stmt->bindParam(':fullname', $data['fullname']);
+  $stmt->bindParam(':class', $data['class']);
+  $stmt->bindParam(':address', $data['address']);
+  $stmt->execute();
+}
+
+// Fungsi untuk mengubah data siswa
+function updateStudent($data, $DB)
+{
+  $query = "UPDATE students SET fullname = :fullname, class = :class, address = :address WHERE nis = :nis";
+  $stmt = $DB->prepare($query);
+  $stmt->bindParam(':fullname', $data['fullname']);
+  $stmt->bindParam(':class', $data['class']);
+  $stmt->bindParam(':address', $data['address']);
+  $stmt->bindParam(':nis', $data['nis']);
+  $stmt->execute();
+}
+
+// Fungsi untuk menghapus data siswa berdasarkan NIS
+function deleteStudentByNIS($nis, $DB)
+{
+  $query = "DELETE FROM students WHERE nis = :nis";
+  $stmt = $DB->prepare($query);
+  $stmt->bindParam(':nis', $nis);
+  $stmt->execute();
+}
+
+// KODE UTAMA
+
+// Koneksi ke database
 $DB = connectDb();
 
+// Memeriksa apakah pengguna sudah login
 if (!isLoggedIn()) {
 
-  header('location: login.php');
-  exit();
+  // Redirect ke halaman login jika belum login
+  redirectTo('login.php');
 }
 
 // Muat data siswa ketika NIS diberikan
 if (isset($_GET['nis'])) {
-
-  // Mengambil data siswa berdasarkan NIS
-  $query = "SELECT * FROM students WHERE nis = :nis";
-  $stmt = $DB->prepare($query);
-  $stmt->bindParam(':nis', $_GET['nis']);
-  $stmt->execute();
-  $student = $stmt->fetch(PDO::FETCH_ASSOC);
+  $student = getStudentByNIS($_GET['nis'], $DB);
 }
 
 // Handle tambah siswa
 if (isset($_POST['action']) && $_POST['action'] == 'insert') {
+
+  // Validasi data
   $validation = validate($_POST, $DB);
 
+  // Jika data valid, tambahkan data siswa
   if ($validation['nis'] && $validation['fullname'] && $validation['class'] && $validation['address']) {
-    $query = "INSERT INTO students (nis, fullname, class, address) VALUES (:nis, :fullname, :class, :address)";
-    $stmt = $DB->prepare($query);
-    $stmt->bindParam(':nis', $_POST['nis']);
-    $stmt->bindParam(':fullname', $_POST['fullname']);
-    $stmt->bindParam(':class', $_POST['class']);
-    $stmt->bindParam(':address', $_POST['address']);
-    $stmt->execute();
 
-    header('location: index.php');
-    exit();
+    // Tambahkan data siswa
+    insertStudent($_POST, $DB);
+
+    // Redirect ke halaman utama
+    redirectTo('index.php');
   }
 }
 
 // Handle ubah siswa
 if (isset($_POST['action']) && $_POST['action'] == 'update') {
+
+  // Validasi data
   $validation = validate($_POST, $DB);
 
+  // Jika data valid, ubah data siswa
   if ($validation['nis'] && $validation['fullname'] && $validation['class'] && $validation['address']) {
-    $query = "UPDATE students SET fullname = :fullname, class = :class, address = :address WHERE nis = :nis";
-    $stmt = $DB->prepare($query);
-    $stmt->bindParam(':fullname', $_POST['fullname']);
-    $stmt->bindParam(':class', $_POST['class']);
-    $stmt->bindParam(':address', $_POST['address']);
-    $stmt->bindParam(':nis', $_POST['nis']);
-    $stmt->execute();
 
-    header('location: index.php');
-    exit();
+    // Ubah data siswa
+    updateStudent($_POST, $DB);
+
+    // Redirect ke halaman utama
+    redirectTo('index.php');
   }
 }
 
 // Handle hapus siswa
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-  $query = "DELETE FROM students WHERE nis = :nis";
-  $stmt = $DB->prepare($query);
-  $stmt->bindParam(':nis', $_GET['nis']);
-  $stmt->execute();
 
-  header('location: index.php');
-  exit();
+  // Hapus data siswa
+  deleteStudentByNIS($_GET['nis'], $DB);
+
+  // Redirect ke halaman utama
+  redirectTo('index.php');
 }
 
 ?>
